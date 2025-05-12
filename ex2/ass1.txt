@@ -1,0 +1,212 @@
+1) Write a shell script iaop to perform integer arithmetic on two numbers, where the
+Value of the two numbers will be given during runtime.
+Commands:-
+echo "Enter the first number"
+read n
+echo "Enter the second number"
+read m
+a=`expr $n + $m`
+s=`expr $n - $m`
+p=`expr $n \* $m`
+d=`expr $n / $m`
+r=`expr $n % $m`
+echo "The Addition of $n and $m is $a"
+echo "The Subtraction of $n and $m is $s"
+echo "The Multiplication of $n and $m is $p"
+echo "The Division of $n and $m is $d"
+echo "The Modulus of $n and $m is $r"
+
+2) Write a shell script faop to perform floating point arithmetic on two numbers, where the
+value of the two numbers will be given during runtime.
+Commands:-
+echo "Enter the 1st floating point number"
+read n
+echo "Enter the 2nd floating point number"
+read m
+a=$(echo "$n + $m"|bc)
+s=`echo $n - $m |bc`
+p=`echo $n \* $m |bc`
+d=`echo $n / $m |bc`
+echo "The Addition of $n and $m is $a"
+echo "The Subtraction of $n and $m is $s"
+echo "The Multiplication of $n and $m is $p"
+echo "The Division of $n and $m is $d"
+
+3) Ramesh’s basic salary is input through the keyboard. His dearness allowance is 40% of
+basic salary, and house rent allowance is 20% of basic salary. Write a program to
+calculate his gross salary.
+Commands:-
+echo "Enter Ramesh's Basic Salary: "
+read n
+da=`echo $n \* 0.4 |bc`
+hra=`echo $n \* 0.2 |bc`
+gs=`echo $da + $hra + $n |bc`
+echo "Ramesh's Gross Salary is: $gs"
+
+4) If a five digit number is input given through the keyboard during runtime, write a
+program to calculate the sum of its digits.
+Commands:-
+echo "Enter a five-digit number:"
+read num
+sum=0
+while [ $num -gt 0 ];
+do
+ digit=$(( num % 10 ))
+ sum=$(( sum + digit ))
+ num=$(( num / 10 ))
+done
+echo "The sum of the digits is: $sum"
+
+5) If cost price and selling price of an item is input through the keyboard, write a program to
+determine whether the seller has made profit or incurred loss. Also determine how much
+profit was made or loss incurred.
+Commandsecho "Enter the CP: "
+read cp
+echo "Enter the SP: "
+read sp
+if [ $cp -gt $sp ]
+then
+loss=$(( $cp - $sp))
+echo "The value of loss $loss"
+else
+profit=$(($sp - $cp))
+echo "The profit value is $profit"
+fi
+
+6) Write a shell script which receives any year from the keyboard and determines, whether
+the year is a leap year or not. If no argument is supplied the current year should be
+assumed.
+Commands:-
+if [ $1 ]
+then
+year=$1
+else
+year=2024
+fi
+a=$(($year%400))
+b=$(($year%100))
+c=$(($year%4))
+if [ $a -eq 0 -o $b -ne 0 -a $c -eq 0 ]
+then
+echo "$year is a leap year."
+else
+echo "$year is not a leap year."
+fi
+
+7) Write a shell script allow that will display a message to enter internal mark and
+percentage in attendance, if the entered mark is greater than equal to 20 and entered
+percentage in attendance is greater that equal to 75 then display the message Allowed for
+Semester otherwise display the message Not allowed.
+Commands:-
+echo "Enter your internal mark: "
+read mark
+echo "Enter your attendance percentage: "
+read p
+if [ $mark -ge 20 -a $p -ge 75 ]
+then
+echo "Allowed for sem"
+else
+echo "Not allowed"
+fi
+
+8) Write a shell script small3 that will compare three numbers passed as command line
+arguments and display the smallest one.
+Commands:-
+if [ $1 -lt $2 -a $1 -lt $3 ]
+then
+echo "The Smallest number is: $1 "
+elif [ $2 -lt $3 -a $2 -lt $1 ]
+then
+echo "The Smallest number is: $2 "
+else
+echo "The Smallest number is: $3 "
+fi
+
+9) Write a shell script check_char which will display one message to enter a character and
+according to the character entered it will display appropriate message from the following
+options:
+You entered a lower case alphabet
+You entered an upper case alphabet.
+You have entered a digit.
+You have entered a special symbol.
+You have entered more than one character.
+C
+echo "Enter a Character: "
+read ch
+case $ch in
+[a-z])echo "You entered a lowercase character";;
+[A-Z])echo "You entered a uppercase character";;
+[0-9])echo "You entered a digit character";;
+?)echo "You entered a special character";;
+*)echo "You entered more than one character";;
+esac
+
+10) Write a shell script class_time which will display one message to enter a day and according to
+the day entered it will display the DOS class time along with the room information or the message “No
+class on day_name” or “Holiday” for Sunday.
+Commands:-
+echo "Enter a Day:"
+read day
+case $day in
+monday)echo "No class on $day";;
+tuesday)echo "No class on $day";;
+wednesday)echo "class time 10:00am-11:00am and room no.C-023 on $day";;
+thursday)echo "class time 5:00pm-6:00pm and room no.C-023 on $day";;
+friday)echo "class time 3:00pm-4:00pm and room no.C-023 on $day";;
+saturday)echo "class time 2:00pm-4:00pm and room no.C-005 on $day";;
+sunday)echo "$day is Holiday";;
+*)echo "you entered a wrong choice";;
+esac
+
+11) Write a shell script filechk that will take two file names as command line arguments, and check
+whether the content of two files are same or not . If contents of two files are same, then it will display
+the message: Files filename1 and filename2 have same content.
+then delete the second file and display the message: So filename2 is deleted.
+Otherwise display the message: Files filename1 and filename2 have different content.
+Commands:-
+if cmp -s "$1" "$2"
+then
+echo "Files $1 and $2 have same content"
+rm -i "$2"
+echo "The $2 file is deleted"
+else
+echo "Files $1 and $2 have different content"
+fi
+
+12) Write a shell script calculator that will take three command line arguments, where the first
+argument will specify the first operand, second argument will specify the operator
+and the third argument will specify the second operand and display the output of the
+arithmetic operation specified in the following format: op1 operator op2 = result .
+commands:-
+n1=$1
+op=$2
+n2=$3
+case $op in
+ "+")
+ result=$(echo "$n1 + $n2" | bc)
+ ;;
+ "-")
+ result=$(echo "$n1 - $n2" | bc)
+ ;;
+ "x")
+ result=$(echo "$n1 * $n2" | bc)
+ ;;
+ "/")
+ if [ "$n2" == "0" ]; then
+ echo "Error: Division by zero is not allowed."
+ exit 1
+ fi
+ result=$(echo "scale=2; $n1 / $n2" | bc)
+ ;;
+ "%")
+ result=$(echo "$n1 % $n2" | bc)
+ ;;
+ "^")
+ result=$(echo "$n1^$n2" | bc)
+ ;;
+ *)
+ echo "Invalid operator. Supported operators are +, -, x, /, %, ^."
+ exit 1
+ ;;
+esac
+echo "$n1 $op $n2 = $result"
